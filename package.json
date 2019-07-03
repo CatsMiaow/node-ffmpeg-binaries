@@ -19,13 +19,12 @@
   ],
   "dependencies": {
     "decompress": "^4.2.0",
-    "decompress-tarxz": "^2.1.1",
     "decompress-unzip": "^4.0.1"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.10.0"
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.0"
   },
   "repository": {
     "type": "git",

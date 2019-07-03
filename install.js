@@ -1,7 +1,6 @@
 const { get } = require('https');
 const { cursorTo } = require('readline');
 const decompress = require('decompress');
-const tarxz = require('decompress-tarxz');
 const unzip = require('decompress-unzip');
 
 function callback(res) {
@@ -33,7 +32,8 @@ function callback(res) {
     console.log(`Downloading binary: [${'='.repeat(20)}] 100%`);
 
     decompress(buf, 'bin', {
-      plugins: process.platform === 'linux' ? [tarxz()] : [unzip()],
+      // plugins: process.platform === 'linux' ? [tarxz()] : [unzip()],
+      plugins: [unzip()],
       strip: process.platform === 'linux' ? 1 : 2,
       filter: x => x.path === (process.platform === 'win32' ? 'ffmpeg.exe' : 'ffmpeg'),
     });
@@ -54,16 +54,16 @@ if (process.platform === 'win32') {
 } else if (process.platform === 'linux') {
   switch (process.arch) {
     case 'x64':
-      get('https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz', callback);
+      get('https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz', callback);
       break;
     case 'ia32':
-      get('https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-32bit-static.tar.xz', callback);
+      get('https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-i686-static.tar.xz', callback);
       break;
     case 'arm':
-      get('https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-armhf-32bit-static.tar.xz', callback);
+      get('https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-armhf-static.tar.xz', callback);
       break;
     case 'arm64':
-      get('https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-arm64-64bit-static.tar.xz', callback);
+      get('https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-arm64-static.tar.xz', callback);
       break;
     default:
       throw new Error('unsupported platform');
